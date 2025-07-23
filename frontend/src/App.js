@@ -31,7 +31,7 @@ const AppHeader = ({ layoutStyle }) => {
     return (
         <header className="app-header">
             <div className="header-content">
-                <div className="logo" onClick={() => navigate('/home')}>JobPortal</div>
+                <div className="logo" onClick={() => navigate('/home')}>HireWise</div>
                 <nav className="header-nav">
                     {/* Conditionally render the dropdown based on layoutStyle */}
                     {layoutStyle === 'header' && (
