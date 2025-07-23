@@ -1,0 +1,777 @@
+/* FINAL STYLESHEET WITH LANDING PAGE LAYOUT */
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root { 
+    --font-primary: 'Poppins', sans-serif; 
+    --font-secondary: 'Lora', serif; 
+    --theme-transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease; 
+}
+
+.light-theme { 
+    --bg-primary: #F5F5DC; 
+    --bg-secondary: #ffffff; 
+    --bg-tertiary: #faf8f0; 
+    --text-primary: #4b0018; 
+    --text-secondary: #6d4a2a; 
+    --text-tertiary: #9c8b7b; 
+    --accent-primary: #800020; 
+    --accent-secondary: #B8860B; 
+    --border-color: #e0d9c8; 
+    --shadow-color: rgba(109, 74, 42, 0.1); 
+    --shadow-color-hover: rgba(128, 0, 32, 0.15); 
+    --btn-text-color: #FFFFFF; 
+    --link-color: var(--accent-primary); 
+    --link-color-hover: var(--accent-secondary); 
+    --glow-color: rgba(184, 134, 11, 0.3); 
+    --glass-bg: rgba(255, 255, 255, 0.7); 
+}
+
+.dark-theme { 
+    --bg-primary: #2c000c; 
+    --bg-secondary: #4a0017; 
+    --bg-tertiary: #3a0012; 
+    --text-primary: #F5F5DC; 
+    --text-secondary: #d4c8a8; 
+    --text-tertiary: #a89f87; 
+    --accent-primary: #e7ad4e; 
+    --accent-secondary: #F5F5DC; 
+    --border-color: #601028; 
+    --shadow-color: rgba(0, 0, 0, 0.2); 
+    --shadow-color-hover: rgba(231, 173, 78, 0.2); 
+    --btn-text-color: #2c000c; 
+    --link-color: var(--accent-primary); 
+    --link-color-hover: var(--accent-secondary); 
+    --glow-color: rgba(231, 173, 78, 0.4); 
+    --glass-bg: rgba(74, 0, 23, 0.6); 
+}
+
+body { 
+    margin: 0; 
+    font-family: var(--font-primary); 
+    background-color: var(--bg-primary); 
+    color: var(--text-primary); 
+    transition: var(--theme-transition); 
+}
+
+h1, h2, h3, h4, h5, h6 { 
+    font-family: var(--font-secondary); 
+    color: var(--text-primary); 
+    margin-top: 0; 
+}
+
+p { 
+    line-height: 1.7; 
+    color: var(--text-secondary); 
+}
+
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* --- Main App Layout --- */
+#root { 
+    display: flex; 
+    flex-direction: column; 
+    min-height: 100vh; 
+}
+.app-container { 
+    display: flex; 
+    flex-direction: column; 
+    flex-grow: 1; 
+}
+.main-content { 
+    flex-grow: 1; 
+}
+.page-content { 
+    animation: fadeIn 0.8s ease; 
+}
+.content-wrapper { 
+    width: 100%; 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding: 0 2rem; 
+    box-sizing: border-box; 
+}
+
+/* --- Header --- */
+.app-header { 
+    padding: 1.5rem 2rem; 
+    background: var(--glass-bg); 
+    -webkit-backdrop-filter: blur(10px); 
+    backdrop-filter: blur(10px); 
+    border-bottom: 1px solid var(--border-color); 
+    position: sticky; 
+    top: 0; 
+    z-index: 100; 
+    animation: fadeIn 0.5s ease;
+}
+.header-content { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    max-width: 1200px; 
+    margin: 0 auto; 
+}
+.logo { 
+    font-size: 1.8rem; 
+    font-weight: 700; 
+    color: var(--accent-primary); 
+    font-family: var(--font-secondary); 
+    cursor: pointer;
+}
+.header-nav { 
+    display: flex; 
+    align-items: center; 
+    gap: 1.5rem; 
+}
+.nav-link { 
+    color: var(--text-secondary); 
+    font-weight: 500; 
+    text-decoration: none; 
+    transition: color 0.3s ease; 
+    display: flex; 
+    align-items: center; 
+    gap: 0.5rem; 
+    cursor: pointer;
+}
+.nav-link:hover { 
+    color: var(--accent-primary); 
+}
+.theme-toggle-btn { 
+    background: none; 
+    border: none; 
+    color: var(--text-secondary); 
+    cursor: pointer; 
+    padding: 0; 
+}
+.theme-toggle-btn:hover { 
+    color: var(--accent-primary); 
+}
+.theme-toggle-btn svg { 
+    width: 24px; 
+    height: 24px; 
+}
+
+/* --- Footer --- */
+.app-footer { 
+    padding: 1.5rem 2rem; 
+    border-top: 1px solid var(--border-color); 
+    margin-top: auto; 
+    background-color: var(--bg-tertiary);
+}
+.footer-content { 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+}
+.logout-btn { 
+    background: none; 
+    border: none; 
+    color: var(--text-secondary); 
+    font-weight: 500; 
+    cursor: pointer; 
+    display: flex; 
+    align-items: center; 
+    gap: 0.5rem; 
+    font-size: 1rem;
+}
+.logout-btn:hover { 
+    color: var(--accent-primary); 
+}
+
+/* --- Homepage Sections --- */
+.page-section { 
+    padding: 6rem 0; 
+    overflow: hidden;
+}
+.section-grid { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 4rem; 
+    align-items: center; 
+}
+.section-content h1 { 
+    font-size: 3.5rem; 
+    font-weight: 700; 
+    line-height: 1.2; 
+    margin-bottom: 1.5rem; 
+}
+.section-content p { 
+    font-size: 1.1rem; 
+    margin-bottom: 2rem; 
+    max-width: 500px; 
+}
+.btn { 
+    display: inline-block; 
+    font-family: var(--font-primary); 
+    font-weight: 600; 
+    font-size: 1rem; 
+    text-align: center; 
+    padding: 16px 32px; 
+    border-radius: 8px; 
+    border: none; 
+    cursor: pointer; 
+    transition: transform 0.2s ease, box-shadow 0.2s ease; 
+    text-decoration: none;
+}
+.btn-primary { 
+    background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary)); 
+    color: var(--btn-text-color); 
+    box-shadow: 0 4px 20px -5px var(--accent-primary); 
+}
+.btn-primary:hover { 
+    transform: translateY(-3px); 
+    box-shadow: 0 6px 25px -5px var(--accent-primary), 0 0 20px var(--glow-color); 
+}
+.section-image { 
+    text-align: center; 
+}
+.section-image img { 
+    max-width: 100%; 
+    border-radius: 16px; 
+    box-shadow: 0 10px 40px var(--shadow-color); 
+}
+
+/* Alternate Layout (Image on Left) */
+.section-grid.reverse .section-content { 
+    grid-column: 2; 
+}
+.section-grid.reverse .section-image { 
+    grid-column: 1; 
+}
+
+.animated-element {
+    animation: fadeInUp 1s ease-out;
+    animation-fill-mode: both;
+}
+
+/* ADD THIS TO THE END OF YOUR src/index.css FILE */
+
+/* --- Profile Page Styles --- */
+.profile-card {
+    padding: 2.5rem 3rem;
+}
+
+.profile-card p {
+    font-size: 1.1rem;
+    font-family: var(--font-primary);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile-card p:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.profile-card strong {
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+/* ADD THIS TO THE END OF YOUR src/index.css FILE */
+
+/* --- ATS Analysis Page Styles --- */
+.analysis-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+.upload-panel {
+    text-align: center;
+    position: sticky; /* Makes the upload box stick while scrolling results */
+    top: 120px; /* Adjust based on your header height */
+}
+
+.upload-box {
+    border: 2px dashed var(--border-color);
+    border-radius: 16px;
+    padding: 3rem;
+    transition: all 0.3s ease;
+}
+
+.upload-box:hover {
+    border-color: var(--accent-primary);
+    background-color: var(--bg-tertiary);
+}
+
+.upload-box .icon {
+    color: var(--accent-primary);
+    width: 60px;
+    height: 60px;
+    margin-bottom: 1rem;
+}
+
+.upload-box h3 {
+    font-family: var(--font-primary);
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.upload-box p {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.privacy-note {
+    font-size: 0.8rem;
+    margin-top: 1rem;
+    color: var(--text-tertiary);
+}
+
+/* --- ATS Score Card --- */
+.ats-score-card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.score-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.score-header h2 {
+    font-size: 1.5rem;
+    margin: 0;
+    font-family: var(--font-primary);
+    font-weight: 600;
+}
+
+.score-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.score-value span {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+}
+
+.main-progress-bar {
+    width: 100%;
+    height: 20px;
+    background-color: var(--bg-tertiary);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    border: 1px solid var(--border-color);
+}
+
+.main-progress-bar-inner {
+    height: 100%;
+    background: linear-gradient(90deg, #c53030, #e7ad4e, #2f855a);
+    animation: progress-anim 1s ease-out forwards;
+}
+
+@keyframes progress-anim { from { width: 0%; } }
+
+.score-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.breakdown-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.breakdown-item h4 {
+    margin: 0;
+    font-family: var(--font-primary);
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.breakdown-score {
+    font-weight: 600;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.breakdown-progress {
+    flex-grow: 1;
+    height: 8px;
+    background-color: var(--bg-tertiary);
+    border-radius: 4px;
+}
+
+.breakdown-progress-inner {
+    height: 100%;
+    border-radius: 4px;
+    animation: progress-anim 1s ease-out forwards .3s;
+}
+
+.progress-red { background-color: #c53030; }
+.progress-yellow { background-color: #e7ad4e; }
+.progress-green { background-color: #2f855a; }
+
+/* ADD THIS TO THE END OF YOUR src/index.css FILE */
+
+/* --- List Page Styles (for JobList, ResumeList, etc.) --- */
+.list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.list-item-card {
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 1.75rem 2rem;
+    box-shadow: 0 4px 20px var(--shadow-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.list-item-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 25px var(--shadow-color-hover), 0 0 15px var(--glow-color);
+    border-color: var(--accent-secondary);
+}
+
+.list-item-card h3 {
+    font-family: var(--font-primary);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 0.5rem 0;
+}
+
+.list-item-card .description {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1.25rem;
+}
+
+.skills-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.skill-tag {
+    background-color: var(--bg-tertiary);
+    color: var(--text-secondary);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border: 1px solid var(--border-color);
+}
+
+/* ADD THIS TO THE END OF YOUR src/index.css FILE */
+
+/* --- Job Matching Page Styles --- */
+.match-controls-container {
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end; /* Aligns button nicely with inputs */
+    gap: 1.5rem;
+}
+
+.match-control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex-grow: 1;
+    min-width: 200px; /* Ensures inputs don't get too squished */
+}
+
+.match-results-container {
+    width: 100%;
+}
+
+.match-results-header {
+    font-size: 1.8rem;
+    font-family: var(--font-secondary);
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.match-results-header span {
+    color: var(--accent-primary);
+    font-weight: 600;
+}
+
+.match-card {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 20px var(--shadow-color);
+    animation: fadeInUp 0.5s ease forwards;
+    opacity: 0;
+}
+
+.match-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.match-card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.match-card-company {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-top: 0.25rem;
+}
+
+.match-score {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+}
+
+.match-keywords {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.match-keywords p {
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.match-keywords .keywords-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.keyword-tag {
+    font-size: 0.85rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+}
+
+.keyword-tag.matched {
+    background-color: #c6f6d5;
+    color: #2f855a;
+    border: 1px solid #9ae6b4;
+}
+
+.keyword-tag.missing {
+    background-color: #fed7d7;
+    color: #c53030;
+    border: 1px solid #fbb6ce;
+}
+
+/* Dark theme overrides for keywords */
+.dark-theme .keyword-tag.matched {
+    background-color: #2f855a;
+    color: #c6f6d5;
+    border-color: #38a169;
+}
+
+.dark-theme .keyword-tag.missing {
+    background-color: #c53030;
+    color: #fed7d7;
+    border-color: #e53e3e;
+}
+
+/* ADD THIS TO THE END OF YOUR src/index.css FILE */
+
+/* --- List Page Styles (for JobList, ResumeList, etc.) --- */
+.list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.list-item-card {
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 1.75rem 2rem;
+    box-shadow: 0 4px 20px var(--shadow-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.list-item-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 25px var(--shadow-color-hover), 0 0 15px var(--glow-color);
+    border-color: var(--accent-secondary);
+}
+
+.list-item-card h3 {
+    font-family: var(--font-primary);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 0.5rem 0;
+}
+
+.list-item-card .description {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1.25rem;
+}
+
+.skills-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.skill-tag {
+    background-color: var(--bg-tertiary);
+    color: var(--text-secondary);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border: 1px solid var(--border-color);
+}
+
+/* ADD THIS TO THE END OF YOUR src/index.css FILE */
+
+/* --- Dropdown Menu --- */
+.dropdown { 
+    position: relative; 
+}
+.dropdown-menu { 
+    position: absolute; 
+    top: 150%; 
+    right: 0; 
+    background-color: var(--bg-secondary); 
+    border-radius: 8px; 
+    box-shadow: 0 8px 30px var(--shadow-color); 
+    border: 1px solid var(--border-color); 
+    list-style: none; 
+    padding: 0.5rem; 
+    margin: 0; 
+    width: 240px; /* Increased width for longer text */
+    z-index: 101; 
+    opacity: 0; 
+    visibility: hidden; 
+    transform: translateY(10px); 
+    transition: all 0.3s ease; 
+}
+.dropdown:hover .dropdown-menu { 
+    opacity: 1; 
+    visibility: visible; 
+    transform: translateY(0); 
+}
+.dropdown-item { 
+    padding: 0.75rem 1rem; 
+    color: var(--text-secondary); 
+    font-weight: 500; 
+    border-radius: 6px; 
+    cursor: pointer; 
+    display: block; 
+    text-decoration: none;
+}
+.dropdown-item:hover { 
+    background-color: var(--bg-tertiary); 
+    color: var(--text-primary); 
+}
+
+/* --- Preview Toggle Button --- */
+.preview-toggle { 
+    position: fixed; 
+    bottom: 20px; 
+    right: 20px; 
+    z-index: 1000; 
+    background: var(--accent-primary); 
+    color: var(--btn-text-color); 
+    padding: 1rem; 
+    border-radius: 8px; 
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2); 
+    cursor: pointer; 
+    border: none; 
+    font-weight: 600; 
+    font-family: var(--font-primary);
+}
+
+/* ADD THIS TO THE END OF YOUR src/index.css FILE */
+
+/* --- Homepage Visual Card Styles --- */
+.section-visual-card {
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 32px 0 var(--shadow-color);
+    border-radius: 16px;
+    padding: 2rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+}
+
+.section-visual-card h3 {
+    font-family: var(--font-primary);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+}
+
+.section-visual-card p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+.card-stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.card-stat .label {
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.card-stat .value {
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: var(--accent-primary);
+}
