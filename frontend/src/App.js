@@ -15,6 +15,7 @@ import ResumeList from './components/ResumeList';
 import JobMatch from './components/JobMatch';
 import ResumeMatchAllJobs from './components/ResumeMatchAllJobs';
 import MatchOnlineJobs from './components/MatchOnlineJobs';
+import OnlineJobs from './components/OnlineJobs'; // <-- ADD THIS IMPORT
 
 // --- ICONS ---
 const icons = {
@@ -24,7 +25,7 @@ const icons = {
     moon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
 };
 
-// --- NEW LAYOUT COMPONENTS ---
+// --- LAYOUT COMPONENTS ---
 const AppHeader = ({ layoutStyle }) => {
     const { theme, toggleTheme } = useTheme();
     const navigate = useNavigate();
@@ -33,13 +34,13 @@ const AppHeader = ({ layoutStyle }) => {
             <div className="header-content">
                 <div className="logo" onClick={() => navigate('/home')}>HireWise</div>
                 <nav className="header-nav">
-                    {/* Conditionally render the dropdown based on layoutStyle */}
                     {layoutStyle === 'header' && (
                         <div className="dropdown">
                             <span className="nav-link">More Features</span>
                             <ul className="dropdown-menu">
                                 <li><Link to="/resumes" className="dropdown-item">View My Resumes</Link></li>
                                 <li><Link to="/match-resume" className="dropdown-item">Match Resume to All Jobs</Link></li>
+                                <li><Link to="/online-jobs" className="dropdown-item">Browse Online Jobs</Link></li>
                                 <li><Link to="/match-online-jobs" className="dropdown-item">Match to Online Jobs</Link></li>
                             </ul>
                         </div>
@@ -65,7 +66,7 @@ const AppFooter = () => {
         <footer className="app-footer">
             <div className="footer-content">
                 <button onClick={handleLogout} className="logout-btn">{icons.logout} Logout</button>
-                <p>&copy; 2025 JobPortal. All rights reserved.</p>
+                <p>&copy; 2025 HireWise. All rights reserved.</p>
             </div>
         </footer>
     );
@@ -85,16 +86,14 @@ const MainLayout = ({ children, layoutStyle, onToggleLayout }) => (
 // --- APP ROUTING LOGIC ---
 function App() {
     const { token } = useAuth();
-    const [layoutStyle, setLayoutStyle] = useState('header'); // 'header' or 'scroll'
+    const [layoutStyle, setLayoutStyle] = useState('header');
 
     const toggleLayout = () => {
         setLayoutStyle(prev => (prev === 'header' ? 'scroll' : 'header'));
     };
 
-    // This component now renders the correct page within the main layout
     const AppRoutes = () => (
         <Routes>
-            {/* The HomePage now receives the layoutStyle to control its content */}
             <Route path="/home" element={<HomePage layoutStyle={layoutStyle} />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/upload" element={<ResumeUpload />} />
@@ -103,6 +102,7 @@ function App() {
             <Route path="/resumes" element={<ResumeList />} />
             <Route path="/match-job" element={<JobMatch />} />
             <Route path="/match-resume" element={<ResumeMatchAllJobs />} />
+            <Route path="/online-jobs" element={<OnlineJobs />} /> {/* <-- ADD THIS ROUTE */}
             <Route path="/match-online-jobs" element={<MatchOnlineJobs />} />
             <Route path="*" element={<Navigate to="/home" />} />
         </Routes>

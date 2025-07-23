@@ -107,7 +107,7 @@ const HomePage = ({ layoutStyle }) => {
                                     <div className="section-visual-card">
                                         <h3>Document Hub</h3>
                                         <p><strong>Resumes on File:</strong> 3</p>
-                                        <p><strong>Last Upload:</strong> July 23, 2025</p>
+                                        <p><strong>Last Upload:</strong> July 24, 2025</p>
                                         <p style={{marginTop: '1rem'}}>Securely store and access all your career-related files in one place.</p>
                                     </div>
                                 </div>
@@ -115,7 +115,7 @@ const HomePage = ({ layoutStyle }) => {
                         </div>
                     </section>
 
-                    {/* --- Section 5: Match Resume to All Jobs --- */}
+                    {/* --- Section 5: Match Resume to ALL Portal Jobs --- */}
                     <section className="page-section">
                         <div className="content-wrapper">
                             <div className="section-grid">
@@ -130,6 +130,48 @@ const HomePage = ({ layoutStyle }) => {
                                         <p><strong>Best Match Score:</strong> 94%</p>
                                         <p><strong>Top Company Match:</strong> Tech Solutions Inc.</p>
                                         <p style={{marginTop: '1rem'}}>Our AI finds the best opportunities for you based on your unique skills.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    {/* --- Section 6: Browse Online Jobs --- */}
+                    <section className="page-section" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
+                        <div className="content-wrapper">
+                            <div className="section-grid reverse">
+                                <div className="section-content">
+                                    <h2>Browse Global Opportunities</h2>
+                                    <p>Expand your search beyond our portal. Browse the latest job openings from top companies around the world, updated in real-time.</p>
+                                    <Link to="/online-jobs" className="btn btn-primary">Browse Online Jobs</Link>
+                                </div>
+                                <div className="section-image">
+                                    <div className="section-visual-card">
+                                        <h3>Global Job Feed</h3>
+                                        <p><strong>Countries Scanned:</strong> 16</p>
+                                        <p><strong>New Jobs Today:</strong> 2,500+</p>
+                                        <p style={{marginTop: '1rem'}}>Access a world of opportunities directly from your dashboard.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* --- Section 7: Match to Online Jobs --- */}
+                    <section className="page-section">
+                        <div className="content-wrapper">
+                            <div className="section-grid">
+                                <div className="section-content">
+                                    <h2>Match to Online Jobs</h2>
+                                    <p>Don't just browse. Use your optimized resume to find and score matching jobs from across the entire web.</p>
+                                    <Link to="/match-online-jobs" className="btn btn-primary">Match to Online Jobs</Link>
+                                </div>
+                                <div className="section-image">
+                                    <div className="section-visual-card">
+                                        <h3>Web-Wide Matching</h3>
+                                        <p><strong>Best Online Match:</strong> 89%</p>
+                                        <p><strong>Top Company Match:</strong> Global Tech Corp.</p>
+                                        <p style={{marginTop: '1rem'}}>Let our AI search the web for your perfect role.</p>
                                     </div>
                                 </div>
                             </div>
