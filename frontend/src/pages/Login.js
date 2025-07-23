@@ -101,7 +101,7 @@ const Login = () => {
     <>
       <LoginStyles />
       <div className="login-page-container">
-        <h1 className="login-logo">JobPortal</h1>
+        <h1 className="login-logo">HireWise</h1>
         <div className="login-card">
             <h2>Welcome Back</h2>
             <form onSubmit={handleLogin}>

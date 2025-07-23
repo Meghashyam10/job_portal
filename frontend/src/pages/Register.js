@@ -107,7 +107,7 @@ function Register() {
     <>
       <RegisterStyles />
       <div className="register-page-container">
-        <h1 className="register-logo">JobPortal</h1>
+        <h1 className="register-logo">HireWise</h1>
         <div className="register-card">
             <h2>Create Your Account</h2>
             <form onSubmit={handleRegister}>
