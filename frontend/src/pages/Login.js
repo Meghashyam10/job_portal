@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useAuth } from '../context/AuthContext';
-import API from '../api/api'; // <-- IMPORT THE CENTRAL API INSTANCE
+import API from '../api/api';
 
-// The styles component remains the same, no changes needed here.
+// The styles component remains the same.
 const LoginStyles = () => (
     <style>{`
         :root {
@@ -26,73 +26,43 @@ const LoginStyles = () => (
             --btn-text-color: #2c000c; --glow-color: rgba(231, 173, 78, 0.4);
             --glass-bg: rgba(74, 0, 23, 0.6);
         }
-
-        .login-page-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 2rem;
-            background-color: var(--bg-tertiary);
-            font-family: var(--font-primary);
-        }
-        .login-logo {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--accent-primary);
-            font-family: var(--font-secondary);
-            margin-bottom: 2rem;
-        }
-        .login-card {
-            background: var(--glass-bg);
-            -webkit-backdrop-filter: blur(12px);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border-color);
-            box-shadow: 0 8px 32px 0 var(--shadow-color);
-            border-radius: 16px;
-            padding: 2.5rem;
-            width: 100%;
-            max-width: 450px;
-            box-sizing: border-box;
-        }
-        .login-card h2 {
-            text-align: center;
-            font-family: var(--font-primary);
-            font-size: 1.8rem;
-            font-weight: 600;
-            margin-bottom: 2rem;
-            color: var(--text-primary);
-        }
+        .login-page-container { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 2rem; background-color: var(--bg-tertiary); font-family: var(--font-primary); }
+        .login-logo { font-size: 2.5rem; font-weight: 700; color: var(--accent-primary); font-family: var(--font-secondary); margin-bottom: 2rem; }
+        .login-card { background: var(--glass-bg); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border: 1px solid var(--border-color); box-shadow: 0 8px 32px 0 var(--shadow-color); border-radius: 16px; padding: 2.5rem; width: 100%; max-width: 450px; box-sizing: border-box; }
+        .login-card h2 { text-align: center; font-family: var(--font-primary); font-size: 1.8rem; font-weight: 600; margin-bottom: 2rem; color: var(--text-primary); }
         .login-form-group { margin-bottom: 1.5rem; }
         .login-form-label { display: block; margin-bottom: 0.5rem; font-weight: 500; font-size: 0.9rem; color: var(--text-secondary); text-align: left; }
         .login-form-input { width: 100%; box-sizing: border-box; padding: 14px 18px; border-radius: 8px; border: 1px solid var(--border-color); background-color: var(--bg-primary); color: var(--text-primary); font-size: 1rem; }
         .login-btn { width: 100%; margin-top: 1rem; display: inline-block; font-weight: 600; font-size: 1rem; text-align: center; padding: 16px 32px; border-radius: 8px; border: none; cursor: pointer; background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary)); color: var(--btn-text-color); }
         .login-form-link { text-align: center; margin-top: 2rem; font-size: 0.9rem; }
         .login-error-message { color: #e53e3e; background-color: #fed7d7; border: 1px solid #f56565; padding: 0.75rem 1rem; border-radius: 8px; text-align: center; margin-top: 1.5rem; font-size: 0.9rem; }
+        .login-success-message { color: #2f855a; background-color: #c6f6d5; border: 1px solid #38a169; padding: 0.75rem 1rem; border-radius: 8px; text-align: center; margin-bottom: 1.5rem; font-size: 0.9rem; }
     `}</style>
 );
 
 const Login = () => {
+  const location = useLocation();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const navigate = useNavigate();
   const { login } = useAuth();
+
+  useEffect(() => {
+    // Check if we were redirected from the register page
+    if (location.state?.message) {
+      setSuccessMessage(location.state.message);
+      setUsername(location.state.username || "");
+    }
+  }, [location.state]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
+    setSuccessMessage("");
     try {
-      // --- THIS IS THE FIX ---
-      // We now use the central 'API' instance, which correctly points
-      // to your live Render backend URL.
-      const res = await API.post("/login/", {
-        username,
-        password,
-      });
-      
-      // The rest of the logic remains the same.
+      const res = await API.post("/login/", { username, password });
       login(res.data.token);
       navigate("/home");
     } catch (err) {
@@ -108,6 +78,7 @@ const Login = () => {
         <h1 className="login-logo">HireWise</h1>
         <div className="login-card">
             <h2>Welcome Back</h2>
+            {successMessage && <p className="login-success-message">{successMessage}</p>}
             <form onSubmit={handleLogin}>
                 <div className="login-form-group">
                     <label className="login-form-label">Username</label>

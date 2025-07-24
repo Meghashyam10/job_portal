@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import API from '../api/api'; // <-- IMPORT THE API INSTANCE
+import API from '../api/api';
 
-// The styles component remains the same, no changes needed here.
+// The styles component remains the same.
 const RegisterStyles = () => (
     <style>{`
         /* Using the same theme variables for consistency */
@@ -27,44 +26,10 @@ const RegisterStyles = () => (
             --btn-text-color: #2c000c; --glow-color: rgba(231, 173, 78, 0.4);
             --glass-bg: rgba(74, 0, 23, 0.6);
         }
-
-        .register-page-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 2rem;
-            background-color: var(--bg-tertiary);
-            font-family: var(--font-primary);
-        }
-        .register-logo {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--accent-primary);
-            font-family: var(--font-secondary);
-            margin-bottom: 2rem;
-        }
-        .register-card {
-            background: var(--glass-bg);
-            -webkit-backdrop-filter: blur(12px);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border-color);
-            box-shadow: 0 8px 32px 0 var(--shadow-color);
-            border-radius: 16px;
-            padding: 2.5rem;
-            width: 100%;
-            max-width: 450px;
-            box-sizing: border-box;
-        }
-        .register-card h2 {
-            text-align: center;
-            font-family: var(--font-primary);
-            font-size: 1.8rem;
-            font-weight: 600;
-            margin-bottom: 2rem;
-            color: var(--text-primary);
-        }
+        .register-page-container { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 2rem; background-color: var(--bg-tertiary); font-family: var(--font-primary); }
+        .register-logo { font-size: 2.5rem; font-weight: 700; color: var(--accent-primary); font-family: var(--font-secondary); margin-bottom: 2rem; }
+        .register-card { background: var(--glass-bg); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border: 1px solid var(--border-color); box-shadow: 0 8px 32px 0 var(--shadow-color); border-radius: 16px; padding: 2.5rem; width: 100%; max-width: 450px; box-sizing: border-box; }
+        .register-card h2 { text-align: center; font-family: var(--font-primary); font-size: 1.8rem; font-weight: 600; margin-bottom: 2rem; color: var(--text-primary); }
         .register-form-group { margin-bottom: 1.5rem; }
         .register-form-label { display: block; margin-bottom: 0.5rem; font-weight: 500; font-size: 0.9rem; color: var(--text-secondary); text-align: left; }
         .register-form-input { width: 100%; box-sizing: border-box; padding: 14px 18px; border-radius: 8px; border: 1px solid var(--border-color); background-color: var(--bg-primary); color: var(--text-primary); font-size: 1rem; }
@@ -80,24 +45,26 @@ function Register() {
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const { login } = useAuth();
 
   const handleRegister = async (e) => {
     e.preventDefault();
     setError('');
     try {
-        // --- THIS IS THE FIX ---
-        // We now use the central 'API' instance, which correctly points
-        // to your live Render backend URL.
-        const response = await API.post('/register/', {
+        await API.post('/register/', {
             username,
             password,
             email,
         });
         
-        // The rest of the logic remains the same.
-        login(response.data.token);
-        navigate('/home');
+        // --- THIS IS THE NEW FLOW ---
+        // Instead of logging in, we navigate to the login page
+        // and pass a success message and the username in the state.
+        navigate('/login', { 
+            state: { 
+                message: "Registration successful! Please log in.",
+                username: username 
+            }
+        });
 
     } catch (err) {
         const errorMessage = err.response?.data ? JSON.stringify(err.response.data) : 'An unexpected error occurred. Please try again.';
