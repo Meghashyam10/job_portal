@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext'; // Import useAuth to use the login function
+import { useAuth } from '../context/AuthContext';
+import API from '../api/api'; // <-- IMPORT THE API INSTANCE
 
-// This component contains all the styles needed for the Register page.
+// The styles component remains the same, no changes needed here.
 const RegisterStyles = () => (
     <style>{`
         /* Using the same theme variables for consistency */
@@ -79,27 +80,28 @@ function Register() {
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const { login } = useAuth(); // Get the login function from context
+  const { login } = useAuth();
 
   const handleRegister = async (e) => {
     e.preventDefault();
     setError('');
     try {
-        const response = await fetch('http://127.0.0.1:8000/api/register/', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password, email }),
+        // --- THIS IS THE FIX ---
+        // We now use the central 'API' instance, which correctly points
+        // to your live Render backend URL.
+        const response = await API.post('/register/', {
+            username,
+            password,
+            email,
         });
-        const data = await response.json();
-        if (response.ok) {
-            // THIS IS THE FIX: Use the login function to update state
-            login(data.token);
-            navigate('/home');
-        } else {
-            setError(JSON.stringify(data));
-        }
+        
+        // The rest of the logic remains the same.
+        login(response.data.token);
+        navigate('/home');
+
     } catch (err) {
-        setError('An unexpected error occurred. Please try again.');
+        const errorMessage = err.response?.data ? JSON.stringify(err.response.data) : 'An unexpected error occurred. Please try again.';
+        setError(errorMessage);
     }
   };
 
