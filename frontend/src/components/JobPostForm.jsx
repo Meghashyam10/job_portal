@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom'; // Keep this for potential future back buttons
+import { Link } from 'react-router-dom';
+import API from '../api/api'; // <-- IMPORT THE CENTRAL API INSTANCE
 
-// This component contains all the styles needed for the Job Post Form page.
+// The styles component remains the same, no changes needed.
 const JobPostFormStyles = () => (
     <style>{`
         /* Using the same theme variables for consistency */
@@ -87,11 +87,15 @@ const JobPostForm = () => {
     }
 
     try {
-      await axios.post(
-        'http://localhost:8000/api/jobs/',
-        { title, description, skills_required: skillsRequired },
-        { headers: { Authorization: `Token ${token}` } }
-      );
+      // --- THIS IS THE FIX ---
+      // We now use the central 'API' instance, which correctly points to the live backend.
+      // The auth token is also added automatically by the interceptor in api.js.
+      await API.post('/jobs/', { 
+          title, 
+          description, 
+          skills_required: skillsRequired 
+      });
+
       setMessage('Success! Job posted successfully.');
       setTitle('');
       setDescription('');

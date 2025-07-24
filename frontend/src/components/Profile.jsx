@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import API from '../api/api'; // <-- IMPORT THE CENTRAL API INSTANCE
 
-// This component contains all the styles needed for the Profile page.
+// The styles component remains the same.
 const ProfileStyles = () => (
     <style>{`
         /* Using the same theme variables for consistency */
@@ -83,15 +83,11 @@ const Profile = () => {
 
   useEffect(() => {
     const fetchProfile = async () => {
-      const token = localStorage.getItem("token");
-      if (!token) {
-          setLoading(false);
-          return;
-      }
+      // The token is now added automatically by the API instance, so we don't need it here.
       try {
-        const response = await axios.get("http://127.0.0.1:8000/api/profile/", {
-          headers: { Authorization: `Token ${token}` },
-        });
+        // --- THIS IS THE FIX ---
+        // We now use the central 'API' instance.
+        const response = await API.get("/profile/");
         setProfile(response.data);
       } catch (error) {
         console.error("Error fetching profile:", error);

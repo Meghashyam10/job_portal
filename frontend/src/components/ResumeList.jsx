@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
+import API from '../api/api'; // <-- IMPORT THE CENTRAL API INSTANCE
 
 const ResumeList = () => {
   const [resumes, setResumes] = useState([]);
@@ -9,12 +9,9 @@ const ResumeList = () => {
   useEffect(() => {
     const fetchResumes = async () => {
       try {
-        const token = localStorage.getItem("token");
-        const response = await axios.get("http://127.0.0.1:8000/api/resumes/", {
-          headers: {
-            Authorization: `Token ${token}`,
-          },
-        });
+        // --- THIS IS THE FIX ---
+        // The API instance now handles the URL and authentication token automatically.
+        const response = await API.get("/resumes/");
         setResumes(response.data);
       } catch (error) {
         console.error("Error fetching resumes:", error);
@@ -42,12 +39,13 @@ const ResumeList = () => {
                 ) : (
                     <div className="list-container">
                         {resumes.map((resume) => (
-                            <div key={resume.id} className="list-item-card">
+                            <div key={resume.id} className="list-item-card" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
                                 <div style={{display: 'flex', alignItems: 'center', gap: '1.5rem'}}>
                                     <svg xmlns="http://www.w3.org/2000/svg" style={{width: '2rem', height: '2rem', color: 'var(--accent-primary)', flexShrink: 0}} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
                                     </svg>
-                                    <h3>{resume.file_name || resume.file.split("/").pop()}</h3>
+                                    {/* Use the resume_name from the serializer */}
+                                    <h3>{resume.resume_name || `Resume ID: ${resume.id}`}</h3>
                                 </div>
                                 <a
                                     href={resume.file}
