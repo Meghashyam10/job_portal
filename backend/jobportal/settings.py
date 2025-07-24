@@ -106,7 +106,7 @@ REST_FRAMEWORK = {
 CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    "job-portal-umber-seven.vercel.app", # <-- IMPORTANT: REPLACE with your Vercel URL
+    "https://job-portal-git-main-meghashyam10s-projects.vercel.app", # <-- IMPORTANT: REPLACE with your Vercel URL
 ]
 
 # --- STATIC & MEDIA FILES ---
