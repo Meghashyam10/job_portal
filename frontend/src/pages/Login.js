@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
-import { useAuth } from '../context/AuthContext'; // Import useAuth
+import { useAuth } from '../context/AuthContext';
+import API from '../api/api'; // <-- IMPORT THE CENTRAL API INSTANCE
 
-// This component contains all the styles needed for the Login page.
+// The styles component remains the same, no changes needed here.
 const LoginStyles = () => (
     <style>{`
         :root {
@@ -78,17 +78,21 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const { login } = useAuth(); // Get the login function from context
+  const { login } = useAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
     try {
-      const res = await axios.post("http://localhost:8000/api/login/", {
+      // --- THIS IS THE FIX ---
+      // We now use the central 'API' instance, which correctly points
+      // to your live Render backend URL.
+      const res = await API.post("/login/", {
         username,
         password,
       });
-      // THIS IS THE FIX: Use the login function to update state
+      
+      // The rest of the logic remains the same.
       login(res.data.token);
       navigate("/home");
     } catch (err) {
