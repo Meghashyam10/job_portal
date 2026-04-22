@@ -53,7 +53,7 @@ To get a local copy up and running, follow these simple steps.
 Prerequisites
 Node.js and npm
 
-Python and pip
+Python
 
 Installation
 Clone the repo
