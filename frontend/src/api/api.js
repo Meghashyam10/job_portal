@@ -3,7 +3,7 @@ import axios from 'axios';
 // This is the single point of truth for your API's location.
 // It now points directly to your live backend server on Render.
 const API = axios.create({
-  baseURL: 'https://hirewise-backend-df5u.onrender.com/api',
+  baseURL: 'https://hirewise-backend-df5u.onrender.com/api', // Pointing back to production
 });
 
 // This interceptor correctly and automatically adds the authentication
@@ -17,3 +17,4 @@ API.interceptors.request.use((config) => {
 });
 
 export default API;
+        
